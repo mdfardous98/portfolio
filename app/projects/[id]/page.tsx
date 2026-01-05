@@ -1,4 +1,6 @@
-"use client";
+export const dynamicParams = true;
+
+("use client");
 import { motion } from "framer-motion";
 import {
   FaArrowLeft,
