@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/vs.min.css" type="text/css">
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="md-fardous---developer-portfolio">MD Fardous - Developer Portfolio</h1>
+<p>A modern, responsive portfolio website showcasing my skills, experience, and projects as a web developer. Built with Next.js, TypeScript, Tailwind CSS, and Framer Motion.</p>
+<h2 id="%F0%9F%9A%80-features">🚀 Features</h2>
+<ul>
+<li><strong>Responsive Design</strong>: Fully responsive across all devices (desktop, tablet, mobile)</li>
+<li><strong>Modern UI/UX</strong>: Clean, professional design with smooth animations</li>
+<li><strong>Interactive Navigation</strong>: Smooth scrolling navigation with active section highlighting</li>
+<li><strong>Project Showcase</strong>: Detailed project pages with live demos and source code links</li>
+<li><strong>Contact Form</strong>: Functional contact form with validation</li>
+<li><strong>Social Integration</strong>: Links to GitHub, LinkedIn, and other social profiles</li>
+<li><strong>Performance Optimized</strong>: Fast loading with Next.js optimization</li>
+<li><strong>SEO Friendly</strong>: Proper meta tags and structured data</li>
+</ul>
+<h2 id="%F0%9F%9B%A0%EF%B8%8F-tech-stack">🛠️ Tech Stack</h2>
+<ul>
+<li><strong>Framework</strong>: Next.js 14 with App Router</li>
+<li><strong>Language</strong>: TypeScript</li>
+<li><strong>Styling</strong>: Tailwind CSS</li>
+<li><strong>Animations</strong>: Framer Motion</li>
+<li><strong>Icons</strong>: React Icons</li>
+<li><strong>Deployment</strong>: Vercel (recommended)</li>
+</ul>
+<h2 id="%F0%9F%93%8B-sections">📋 Sections</h2>
+<ol>
+<li><strong>Navigation Bar</strong>: Responsive navigation with smooth scrolling</li>
+<li><strong>Hero Section</strong>: Introduction with professional photo and resume download</li>
+<li><strong>About Me</strong>: Detailed personal and professional background</li>
+<li><strong>Skills</strong>: Visual representation of technical and soft skills</li>
+<li><strong>Education</strong>: Academic background and achievements</li>
+<li><strong>Experience</strong>: Professional experience and project-based learning</li>
+<li><strong>Projects</strong>: Showcase of 3+ featured projects with detailed pages</li>
+<li><strong>Contact</strong>: Contact information and message form</li>
+<li><strong>Footer</strong>: Additional links and information</li>
+</ol>
+<h2 id="%F0%9F%9A%80-getting-started">🚀 Getting Started</h2>
+<h3 id="prerequisites">Prerequisites</h3>
+<ul>
+<li>Node.js 18+</li>
+<li>npm or yarn package manager</li>
+</ul>
+<h3 id="installation">Installation</h3>
+<ol>
+<li>Clone the repository:</li>
+</ol>
+<pre class="hljs"><code><div>git <span class="hljs-built_in">clone</span> https://github.com/mdfardous98/developer-portfolio.git
+<span class="hljs-built_in">cd</span> developer-portfolio
+</div></code></pre>
+<ol start="2">
+<li>Install dependencies:</li>
+</ol>
+<pre class="hljs"><code><div>npm install
+<span class="hljs-comment"># or</span>
+yarn install
+</div></code></pre>
+<ol start="3">
+<li>Run the development server:</li>
+</ol>
+<pre class="hljs"><code><div>npm run dev
+<span class="hljs-comment"># or</span>
+yarn dev
+</div></code></pre>
+<ol start="4">
+<li>Open <a href="http://localhost:3000">http://localhost:3000</a> in your browser.</li>
+</ol>
+<h3 id="building-for-production">Building for Production</h3>
+<pre class="hljs"><code><div>npm run build
+npm start
+</div></code></pre>
+<h2 id="%F0%9F%93%81-project-structure">📁 Project Structure</h2>
+<pre class="hljs"><code><div>├── app/
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── page.tsx
+│   └── projects/
+│       └── [id]/
+│           └── page.tsx
+├── components/
+│   ├── About.tsx
+│   ├── Contact.tsx
+│   ├── Education.tsx
+│   ├── Experience.tsx
+│   ├── Footer.tsx
+│   ├── Hero.tsx
+│   ├── Navbar.tsx
+│   ├── Projects.tsx
+│   └── Skills.tsx
+├── public/
+│   └── (images and assets)
+├── package.json
+├── tailwind.config.js
+├── tsconfig.json
+└── README.md
+</div></code></pre>
+<h2 id="%F0%9F%8E%A8-customization">🎨 Customization</h2>
+<h3 id="personal-information">Personal Information</h3>
+<p>Update the following files with your information:</p>
+<ul>
+<li><code>components/Hero.tsx</code> - Name, title, and introduction</li>
+<li><code>components/About.tsx</code> - Personal background and journey</li>
+<li><code>components/Contact.tsx</code> - Contact information</li>
+<li><code>components/Projects.tsx</code> - Your projects data</li>
+<li><code>app/projects/[id]/page.tsx</code> - Detailed project information</li>
+</ul>
+<h3 id="styling">Styling</h3>
+<ul>
+<li>Colors: Modify <code>tailwind.config.js</code> for custom color scheme</li>
+<li>Fonts: Update font imports in <code>app/globals.css</code></li>
+<li>Animations: Customize Framer Motion animations in components</li>
+</ul>
+<h3 id="images">Images</h3>
+<ul>
+<li>Replace placeholder images with your actual photos</li>
+<li>Add project screenshots to showcase your work</li>
+<li>Optimize images for web performance</li>
+</ul>
+<h2 id="%F0%9F%93%B1-responsive-design">📱 Responsive Design</h2>
+<p>The portfolio is fully responsive with breakpoints:</p>
+<ul>
+<li>Mobile: 320px - 768px</li>
+<li>Tablet: 768px - 1024px</li>
+<li>Desktop: 1024px+</li>
+</ul>
+<h2 id="%F0%9F%94%A7-configuration">🔧 Configuration</h2>
+<h3 id="environment-variables">Environment Variables</h3>
+<p>Create a <code>.env.local</code> file for any environment-specific configurations:</p>
+<pre class="hljs"><code><div>NEXT_PUBLIC_SITE_URL=https://your-domain.com
+</div></code></pre>
+<h3 id="seo-configuration">SEO Configuration</h3>
+<p>Update metadata in <code>app/layout.tsx</code>:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> metadata = {
+  title: <span class="hljs-string">"Your Name - Web Developer Portfolio"</span>,
+  description: <span class="hljs-string">"Your description here"</span>,
+};
+</div></code></pre>
+<h2 id="%F0%9F%9A%80-deployment">🚀 Deployment</h2>
+<h3 id="vercel-recommended">Vercel (Recommended)</h3>
+<ol>
+<li>Push your code to GitHub</li>
+<li>Connect your repository to Vercel</li>
+<li>Deploy with automatic builds on push</li>
+</ol>
+<h3 id="other-platforms">Other Platforms</h3>
+<ul>
+<li><strong>Netlify</strong>: Drag and drop the <code>out</code> folder after <code>npm run build</code></li>
+<li><strong>GitHub Pages</strong>: Use <code>next export</code> for static deployment</li>
+<li><strong>Custom Server</strong>: Use <code>npm run build &amp;&amp; npm start</code></li>
+</ul>
+<h2 id="%F0%9F%93%8A-performance">📊 Performance</h2>
+<ul>
+<li>Lighthouse Score: 95+ (Performance, Accessibility, Best Practices, SEO)</li>
+<li>Core Web Vitals: Optimized for LCP, FID, and CLS</li>
+<li>Image Optimization: Next.js automatic image optimization</li>
+<li>Code Splitting: Automatic with Next.js App Router</li>
+</ul>
+<h2 id="%F0%9F%A4%9D-contributing">🤝 Contributing</h2>
+<ol>
+<li>Fork the repository</li>
+<li>Create a feature branch (<code>git checkout -b feature/amazing-feature</code>)</li>
+<li>Commit your changes (<code>git commit -m 'Add amazing feature'</code>)</li>
+<li>Push to the branch (<code>git push origin feature/amazing-feature</code>)</li>
+<li>Open a Pull Request</li>
+</ol>
+<h2 id="%F0%9F%93%84-license">📄 License</h2>
+<p>This project is open source and available under the <a href="LICENSE">MIT License</a>.</p>
+<h2 id="%F0%9F%93%9E-contact">📞 Contact</h2>
+<p><strong>MD Fardous</strong></p>
+<ul>
+<li>Email: mdjfardous@gmail.com</li>
+<li>Phone: +8801688645882</li>
+<li>LinkedIn: <a href="https://www.linkedin.com/in/mdfardous">linkedin.com/in/mdfardous</a></li>
+<li>GitHub: <a href="https://github.com/mdfardous98">github.com/mdfardous98</a></li>
+</ul>
+<h2 id="%F0%9F%99%8F-acknowledgments">🙏 Acknowledgments</h2>
+<ul>
+<li>Next.js team for the amazing framework</li>
+<li>Tailwind CSS for the utility-first CSS framework</li>
+<li>Framer Motion for smooth animations</li>
+<li>React Icons for the icon library</li>
+<li>Vercel for hosting and deployment</li>
+</ul>
+<hr>
+<p>⭐ Star this repository if you found it helpful!</p>
+
+</body>
+</html>
