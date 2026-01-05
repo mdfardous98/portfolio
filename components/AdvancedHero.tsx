@@ -12,6 +12,11 @@ import {
 import Image from "next/image";
 import ParticleBackground from "./ParticleBackground";
 import TypingEffect from "./TypingEffect";
+import CurrentDateTime from "./CurrentDateTime";
+import GamingButton from "./GamingButton";
+import Gaming3DCard from "./Gaming3DCard";
+import GamingHUD from "./GamingHUD";
+import Floating3DElements from "./Floating3DElements";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
 
@@ -85,8 +90,11 @@ const AdvancedHero = () => {
     <section
       id="home"
       className="min-h-screen flex items-center hero-gradient relative overflow-hidden"
+      style={{ perspective: "1000px" }}
     >
       <ParticleBackground />
+      <GamingHUD />
+      <Floating3DElements />
 
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -185,29 +193,28 @@ const AdvancedHero = () => {
               variants={itemVariants}
               className="flex flex-col sm:flex-row gap-4 mb-12"
             >
-              <motion.button
+              <GamingButton
                 onClick={handleResumeDownload}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn-primary text-white font-bold py-4 px-8 rounded-full flex items-center justify-center gap-3 neon-border"
+                variant="primary"
+                size="lg"
+                icon={<FaDownload />}
+                glitch={true}
               >
-                <FaDownload className="text-xl" />
                 {t("hero.downloadResume")}
-              </motion.button>
+              </GamingButton>
 
-              <motion.a
+              <GamingButton
                 href="#projects"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                className="glass text-white font-semibold py-4 px-8 rounded-full flex items-center justify-center gap-3 hover:bg-white hover:bg-opacity-20 transition-all duration-300"
+                variant="secondary"
+                size="lg"
+                icon={<FaRocket />}
               >
-                <FaRocket className="text-xl" />
                 {t("hero.viewWork")}
-              </motion.a>
+              </GamingButton>
             </motion.div>
 
             {/* Social Links */}
-            <motion.div variants={itemVariants} className="flex space-x-6">
+            <motion.div variants={itemVariants} className="flex space-x-6 mb-8">
               {[
                 {
                   icon: FaGithub,
@@ -238,6 +245,11 @@ const AdvancedHero = () => {
                 </motion.a>
               ))}
             </motion.div>
+
+            {/* Current Date & Time */}
+            <motion.div variants={itemVariants}>
+              <CurrentDateTime />
+            </motion.div>
           </div>
 
           {/* Right Content - Enhanced Profile Image */}
@@ -245,124 +257,242 @@ const AdvancedHero = () => {
             variants={itemVariants}
             className="flex justify-center lg:justify-end relative"
           >
-            <div className="relative">
-              {/* Animated Rings */}
-              <motion.div
-                className="absolute inset-0 rounded-full border-4 border-white border-opacity-20"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                style={{
-                  width: "120%",
-                  height: "120%",
-                  top: "-10%",
-                  left: "-10%",
-                }}
-              />
-              <motion.div
-                className="absolute inset-0 rounded-full border-2 border-blue-400 border-opacity-30"
-                animate={{ rotate: -360 }}
-                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                style={{
-                  width: "110%",
-                  height: "110%",
-                  top: "-5%",
-                  left: "-5%",
-                }}
-              />
-
-              {/* Main Profile Image */}
-              <motion.div
-                variants={floatingVariants}
-                animate="animate"
-                className="w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden border-8 border-white shadow-2xl relative z-10"
-              >
-                <Image
-                  src="/profile-photo.jpg"
-                  alt={t("hero.name")}
-                  width={400}
-                  height={400}
-                  className="w-full h-full object-cover"
+            <Gaming3DCard glowColor="cyan" intensity={1.5}>
+              <div className="relative">
+                {/* Animated Rings */}
+                <motion.div
+                  className="absolute inset-0 rounded-full border-4 border-white border-opacity-20"
+                  animate={{ rotate: 360 }}
+                  transition={{
+                    duration: 20,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  style={{
+                    width: "120%",
+                    height: "120%",
+                    top: "-10%",
+                    left: "-10%",
+                  }}
+                />
+                <motion.div
+                  className="absolute inset-0 rounded-full border-2 border-blue-400 border-opacity-30"
+                  animate={{ rotate: -360 }}
+                  transition={{
+                    duration: 15,
+                    repeat: Infinity,
+                    ease: "linear",
+                  }}
+                  style={{
+                    width: "110%",
+                    height: "110%",
+                    top: "-5%",
+                    left: "-5%",
+                  }}
                 />
 
-                {/* Overlay Gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-900 via-transparent to-transparent opacity-30"></div>
-              </motion.div>
+                {/* Enhanced Profile Image with Advanced 3D Effects */}
+                <motion.div
+                  variants={floatingVariants}
+                  animate="animate"
+                  className="w-80 h-80 md:w-96 md:h-96 rounded-full overflow-hidden relative z-10"
+                  style={{
+                    transformStyle: "preserve-3d",
+                  }}
+                  whileHover={{
+                    rotateY: 15,
+                    rotateX: -5,
+                    scale: 1.05,
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {/* Multiple Border Layers for Depth */}
+                  <div className="absolute inset-0 rounded-full border-8 border-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 shadow-2xl"></div>
+                  <div className="absolute inset-2 rounded-full border-4 border-white/30 shadow-inner"></div>
+                  <div className="absolute inset-4 rounded-full border-2 border-cyan-300/50"></div>
 
-              {/* Floating Tech Icons */}
-              <motion.div
-                className="absolute -top-8 -right-8 glass p-4 rounded-full"
-                animate={{
-                  y: [-10, 10, -10],
-                  rotate: [0, 10, -10, 0],
-                }}
-                transition={{
-                  duration: 4,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              >
-                <span className="text-3xl">⚛️</span>
-              </motion.div>
+                  {/* Image Container with Enhanced Effects */}
+                  <div className="absolute inset-6 rounded-full overflow-hidden bg-gradient-to-br from-blue-900/50 to-purple-900/50">
+                    <Image
+                      src="/profile-photo.jpg"
+                      alt={t("hero.name")}
+                      width={400}
+                      height={400}
+                      className="w-full h-full object-cover transition-all duration-500 hover:scale-110 hover:rotate-2"
+                    />
 
-              <motion.div
-                className="absolute -bottom-8 -left-8 glass p-4 rounded-full"
-                animate={{
-                  y: [10, -10, 10],
-                  rotate: [0, -10, 10, 0],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1,
-                }}
-              >
-                <span className="text-3xl">🚀</span>
-              </motion.div>
+                    {/* Enhanced Holographic Overlay */}
+                    <motion.div
+                      className="absolute inset-0 opacity-0 hover:opacity-100 transition-opacity duration-300"
+                      animate={{
+                        background: [
+                          "linear-gradient(45deg, rgba(6, 182, 212, 0.2), transparent, rgba(147, 51, 234, 0.2))",
+                          "linear-gradient(90deg, rgba(147, 51, 234, 0.2), transparent, rgba(6, 182, 212, 0.2))",
+                          "linear-gradient(135deg, rgba(6, 182, 212, 0.2), transparent, rgba(147, 51, 234, 0.2))",
+                          "linear-gradient(180deg, rgba(236, 72, 153, 0.2), transparent, rgba(59, 130, 246, 0.2))",
+                        ],
+                      }}
+                      transition={{ duration: 4, repeat: Infinity }}
+                    />
 
-              <motion.div
-                className="absolute top-1/2 -right-12 glass p-3 rounded-full"
-                animate={{
-                  x: [-5, 5, -5],
-                  rotate: [0, 15, -15, 0],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 2,
-                }}
-              >
-                <FaCode className="text-2xl text-blue-400" />
-              </motion.div>
+                    {/* Scanning Line Effect */}
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-400/30 to-transparent h-8"
+                      animate={{
+                        y: [-32, 400, -32],
+                        opacity: [0, 1, 0],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
 
-              {/* Glowing Orbs */}
-              <motion.div
-                className="absolute top-10 left-10 w-4 h-4 bg-yellow-400 rounded-full"
-                animate={{
-                  scale: [1, 1.5, 1],
-                  opacity: [0.7, 1, 0.7],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-              <motion.div
-                className="absolute bottom-20 right-20 w-3 h-3 bg-pink-400 rounded-full"
-                animate={{
-                  scale: [1, 1.8, 1],
-                  opacity: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 1,
-                }}
-              />
-            </div>
+                    {/* Corner Brackets */}
+                    <div className="absolute top-2 left-2 w-6 h-6 border-l-2 border-t-2 border-cyan-400"></div>
+                    <div className="absolute top-2 right-2 w-6 h-6 border-r-2 border-t-2 border-cyan-400"></div>
+                    <div className="absolute bottom-2 left-2 w-6 h-6 border-l-2 border-b-2 border-cyan-400"></div>
+                    <div className="absolute bottom-2 right-2 w-6 h-6 border-r-2 border-b-2 border-cyan-400"></div>
+
+                    {/* Pulse Ring */}
+                    <motion.div
+                      className="absolute inset-0 rounded-full border-2 border-cyan-400/50"
+                      animate={{
+                        scale: [1, 1.1, 1],
+                        opacity: [0.5, 1, 0.5],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                    />
+                  </div>
+
+                  {/* Outer Glow Effect */}
+                  <motion.div
+                    className="absolute inset-0 rounded-full"
+                    animate={{
+                      boxShadow: [
+                        "0 0 50px rgba(6, 182, 212, 0.3)",
+                        "0 0 80px rgba(147, 51, 234, 0.4)",
+                        "0 0 50px rgba(6, 182, 212, 0.3)",
+                      ],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
+                </motion.div>
+
+                {/* Enhanced Floating Tech Icons */}
+                <motion.div
+                  className="absolute -top-8 -right-8 glass p-4 rounded-lg border border-cyan-500/50"
+                  animate={{
+                    y: [-10, 10, -10],
+                    rotateY: [0, 180, 360],
+                    rotateX: [0, 10, -10, 0],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  style={{ transformStyle: "preserve-3d" }}
+                  whileHover={{
+                    scale: 1.2,
+                    rotateY: 180,
+                  }}
+                >
+                  <span className="text-3xl">⚛️</span>
+                  <div className="absolute inset-0 bg-cyan-500/20 rounded-lg blur-md" />
+                </motion.div>
+
+                <motion.div
+                  className="absolute -bottom-8 -left-8 glass p-4 rounded-lg border border-purple-500/50"
+                  animate={{
+                    y: [10, -10, 10],
+                    rotateY: [0, -180, -360],
+                    rotateZ: [0, -10, 10, 0],
+                  }}
+                  transition={{
+                    duration: 5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1,
+                  }}
+                  style={{ transformStyle: "preserve-3d" }}
+                  whileHover={{
+                    scale: 1.2,
+                    rotateY: -180,
+                  }}
+                >
+                  <span className="text-3xl">🚀</span>
+                  <div className="absolute inset-0 bg-purple-500/20 rounded-lg blur-md" />
+                </motion.div>
+
+                <motion.div
+                  className="absolute top-1/2 -right-12 glass p-3 rounded-lg border border-yellow-500/50"
+                  animate={{
+                    x: [-5, 5, -5],
+                    rotateY: [0, 360],
+                    rotateX: [0, 15, -15, 0],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 2,
+                  }}
+                  style={{ transformStyle: "preserve-3d" }}
+                  whileHover={{
+                    scale: 1.3,
+                    rotateZ: 45,
+                  }}
+                >
+                  <FaCode className="text-2xl text-yellow-400" />
+                  <div className="absolute inset-0 bg-yellow-500/20 rounded-lg blur-md" />
+                </motion.div>
+
+                {/* Enhanced Glowing Orbs */}
+                <motion.div
+                  className="absolute top-10 left-10 w-6 h-6 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full"
+                  animate={{
+                    scale: [1, 1.5, 1],
+                    opacity: [0.7, 1, 0.7],
+                    rotateZ: [0, 360],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  style={{
+                    boxShadow: "0 0 20px rgba(251, 191, 36, 0.6)",
+                  }}
+                />
+                <motion.div
+                  className="absolute bottom-20 right-20 w-4 h-4 bg-gradient-to-r from-pink-400 to-purple-500 rounded-full"
+                  animate={{
+                    scale: [1, 1.8, 1],
+                    opacity: [0.5, 1, 0.5],
+                    rotateZ: [0, -360],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1,
+                  }}
+                  style={{
+                    boxShadow: "0 0 15px rgba(236, 72, 153, 0.6)",
+                  }}
+                />
+              </div>
+            </Gaming3DCard>
           </motion.div>
         </motion.div>
 

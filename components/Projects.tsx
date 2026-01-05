@@ -3,13 +3,16 @@ import { motion } from "framer-motion";
 import { FaExternalLinkAlt, FaGithub, FaEye } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
+import PlaceholderImage from "./PlaceholderImage";
 
 const Projects = () => {
   const projects = [
     {
       id: 1,
       name: "PawMart - Pet Adoption Platform",
-      image: "https://via.placeholder.com/400x250/3B82F6/FFFFFF?text=PawMart",
+      image: null, // Use placeholder
+      placeholderText: "PawMart",
+      placeholderColor: "#3B82F6",
       shortDescription:
         "A comprehensive pet adoption platform with multi-role authentication and admin dashboard.",
       technologies: [
@@ -26,8 +29,9 @@ const Projects = () => {
     {
       id: 2,
       name: "Digital Life Lessons - Blog Platform",
-      image:
-        "https://via.placeholder.com/400x250/10B981/FFFFFF?text=Digital+Life+Lessons",
+      image: null, // Use placeholder
+      placeholderText: "Digital Life Lessons",
+      placeholderColor: "#10B981",
       shortDescription:
         "A modern blog platform with user authentication, CRUD operations, and interactive commenting system.",
       technologies: [
@@ -43,7 +47,9 @@ const Projects = () => {
     {
       id: 3,
       name: "Care XYZ - Healthcare Platform",
-      image: "https://via.placeholder.com/400x250/8B5CF6/FFFFFF?text=Care+XYZ",
+      image: null, // Use placeholder
+      placeholderText: "Care XYZ",
+      placeholderColor: "#8B5CF6",
       shortDescription:
         "A healthcare management platform focusing on winter pet care with appointment booking system.",
       technologies: ["React", "Firebase", "Tailwind CSS", "Responsive Design"],
@@ -85,12 +91,22 @@ const Projects = () => {
             >
               {/* Project Image */}
               <div className="relative h-48 overflow-hidden">
-                <Image
-                  src={project.image}
-                  alt={project.name}
-                  fill
-                  className="object-cover transition-transform duration-300 hover:scale-110"
-                />
+                {project.image ? (
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    fill
+                    className="object-cover transition-transform duration-300 hover:scale-110"
+                  />
+                ) : (
+                  <PlaceholderImage
+                    width={400}
+                    height={192}
+                    text={project.placeholderText}
+                    bgColor={project.placeholderColor}
+                    className="w-full h-full transition-transform duration-300 hover:scale-110"
+                  />
+                )}
                 <div className="absolute top-4 right-4">
                   <span className="bg-primary text-white px-2 py-1 rounded-full text-xs font-medium">
                     {project.category}

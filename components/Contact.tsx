@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import {
   FaEnvelope,
   FaPhone,
@@ -8,64 +9,158 @@ import {
   FaGithub,
   FaLinkedin,
   FaFacebook,
+  FaTelegram,
+  FaDiscord,
+  FaSkype,
+  FaPaperPlane,
+  FaRocket,
 } from "react-icons/fa";
+import Gaming3DCard from "./Gaming3DCard";
+import GamingButton from "./GamingButton";
 
 const Contact = () => {
-  const contactInfo = [
+  const [selectedContact, setSelectedContact] = useState("email");
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    contactMethod: "email",
+    subject: "",
+    message: "",
+  });
+
+  const contactMethods = [
     {
+      id: "email",
       icon: FaEnvelope,
       label: "Email",
       value: "mdjfardous@gmail.com",
       href: "mailto:mdjfardous@gmail.com",
-      color: "text-red-500",
+      color: "from-red-500 to-pink-500",
+      description: "Professional inquiries & collaborations",
     },
     {
+      id: "phone",
       icon: FaPhone,
       label: "Phone",
       value: "+8801688645882",
       href: "tel:+8801688645882",
-      color: "text-green-500",
+      color: "from-green-500 to-emerald-500",
+      description: "Direct calls for urgent matters",
     },
     {
+      id: "whatsapp",
       icon: FaWhatsapp,
       label: "WhatsApp",
       value: "+8801688645882",
       href: "https://wa.me/8801688645882",
-      color: "text-green-600",
+      color: "from-green-600 to-green-400",
+      description: "Quick messages & file sharing",
     },
     {
-      icon: FaMapMarkerAlt,
-      label: "Location",
-      value: "Dhaka, Bangladesh",
-      href: "#",
-      color: "text-blue-500",
+      id: "telegram",
+      icon: FaTelegram,
+      label: "Telegram",
+      value: "@mdfardous",
+      href: "https://t.me/mdfardous",
+      color: "from-blue-500 to-cyan-500",
+      description: "Secure messaging & updates",
     },
   ];
 
-  const socialLinks = [
+  const socialPlatforms = [
     {
       icon: FaGithub,
       label: "GitHub",
       href: "https://github.com/mdfardous98",
-      color: "bg-gray-900 hover:bg-gray-800",
+      color: "from-gray-700 to-gray-900",
+      count: "50+ Repos",
     },
     {
       icon: FaLinkedin,
       label: "LinkedIn",
       href: "https://www.linkedin.com/in/mdfardous",
-      color: "bg-blue-600 hover:bg-blue-700",
+      color: "from-blue-600 to-blue-800",
+      count: "500+ Connections",
     },
     {
       icon: FaFacebook,
       label: "Facebook",
       href: "https://www.facebook.com/tajwar.fardousx",
-      color: "bg-blue-500 hover:bg-blue-600",
+      color: "from-blue-500 to-blue-700",
+      count: "Personal Updates",
+    },
+    {
+      icon: FaDiscord,
+      label: "Discord",
+      href: "#",
+      color: "from-indigo-500 to-purple-600",
+      count: "Coming Soon",
+    },
+    {
+      icon: FaSkype,
+      label: "Skype",
+      href: "#",
+      color: "from-cyan-500 to-blue-500",
+      count: "Video Calls",
     },
   ];
 
+  const handleInputChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Here you would integrate with your backend or email service
+    console.log("Form submitted:", formData);
+    alert("Message sent! I'll get back to you soon.");
+  };
+
   return (
-    <section id="contact" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section
+      id="contact"
+      className="py-20 bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden"
+      style={{ perspective: "1000px" }}
+    >
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute top-20 left-10 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-xl opacity-10"
+          animate={{
+            x: [0, 100, 0],
+            y: [0, -100, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-10"
+          animate={{
+            x: [0, -100, 0],
+            y: [0, 100, 0],
+          }}
+          transition={{
+            duration: 25,
+            repeat: Infinity,
+            ease: "linear",
+          }}
+        />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -73,218 +168,375 @@ const Contact = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Get In Touch
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            whileInView={{ scale: 1, rotate: 0 }}
+            transition={{ duration: 0.8, type: "spring" }}
+            className="inline-block mb-6"
+          >
+            <div className="relative">
+              <span className="text-6xl">📡</span>
+              <motion.div
+                className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full"
+                animate={{ scale: [1, 1.5, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            </div>
+          </motion.div>
+
+          <h2 className="text-4xl md:text-6xl font-black text-white mb-6 neon-text">
+            Let's Connect
           </h2>
-          <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Ready to start your next project? Let's discuss how we can work
-            together to bring your ideas to life.
+          <div className="w-32 h-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 mx-auto mb-8 rounded-full"></div>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Ready to collaborate? Choose your preferred communication method and
+            let's build something amazing together!
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Information */}
+          {/* Contact Methods */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className="space-y-8"
           >
-            <h3 className="text-2xl font-bold text-gray-900 mb-8">
-              Contact Information
-            </h3>
+            <Gaming3DCard glowColor="cyan" intensity={1.2}>
+              <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                <FaRocket className="text-cyan-400" />
+                Contact Methods
+              </h3>
 
-            <div className="space-y-6">
-              {contactInfo.map((contact, index) => (
-                <motion.div
-                  key={contact.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
-                >
-                  <div
-                    className={`p-3 rounded-full bg-white shadow-md ${contact.color}`}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {contactMethods.map((method, index) => (
+                  <motion.div
+                    key={method.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    whileHover={{
+                      scale: 1.05,
+                      rotateY: 5,
+                      z: 20,
+                    }}
+                    onClick={() => setSelectedContact(method.id)}
+                    className={`
+                      relative p-4 rounded-xl cursor-pointer transition-all duration-300
+                      bg-gradient-to-br ${
+                        method.color
+                      } opacity-90 hover:opacity-100
+                      ${
+                        selectedContact === method.id
+                          ? "ring-2 ring-white ring-opacity-50"
+                          : ""
+                      }
+                    `}
+                    style={{ transformStyle: "preserve-3d" }}
                   >
-                    <contact.icon size={24} />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500 font-medium">
-                      {contact.label}
-                    </p>
-                    {contact.href === "#" ? (
-                      <p className="text-gray-900 font-semibold">
-                        {contact.value}
-                      </p>
-                    ) : (
-                      <a
-                        href={contact.href}
-                        className="text-gray-900 font-semibold hover:text-primary transition-colors"
-                        target={
-                          contact.href.startsWith("http") ? "_blank" : undefined
-                        }
-                        rel={
-                          contact.href.startsWith("http")
-                            ? "noopener noreferrer"
-                            : undefined
-                        }
+                    <div className="flex items-center gap-3 mb-2">
+                      <motion.div
+                        animate={{
+                          rotateY: selectedContact === method.id ? 360 : 0,
+                        }}
+                        transition={{ duration: 0.6 }}
                       >
-                        {contact.value}
-                      </a>
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                        <method.icon className="text-2xl text-white" />
+                      </motion.div>
+                      <div>
+                        <h4 className="text-white font-semibold">
+                          {method.label}
+                        </h4>
+                        <p className="text-white/80 text-sm">{method.value}</p>
+                      </div>
+                    </div>
+                    <p className="text-white/70 text-xs">
+                      {method.description}
+                    </p>
 
-            {/* Social Links */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="mt-12"
-            >
-              <h4 className="text-xl font-semibold text-gray-900 mb-6">
-                Connect With Me
-              </h4>
-              <div className="flex gap-4">
-                {socialLinks.map((social, index) => (
+                    {selectedContact === method.id && (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="absolute -top-2 -right-2 w-6 h-6 bg-white rounded-full flex items-center justify-center"
+                      >
+                        <div className="w-3 h-3 bg-green-500 rounded-full" />
+                      </motion.div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Location */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                viewport={{ once: true }}
+                className="mt-6 p-4 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20"
+              >
+                <div className="flex items-center gap-3">
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.2, 1],
+                      rotate: [0, 10, -10, 0],
+                    }}
+                    transition={{ duration: 3, repeat: Infinity }}
+                  >
+                    <FaMapMarkerAlt className="text-2xl text-red-400" />
+                  </motion.div>
+                  <div>
+                    <h4 className="text-white font-semibold">Location</h4>
+                    <p className="text-gray-300">Dhaka, Bangladesh 🇧🇩</p>
+                  </div>
+                </div>
+              </motion.div>
+            </Gaming3DCard>
+
+            {/* Social Platforms */}
+            <Gaming3DCard glowColor="purple" intensity={1.2}>
+              <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                <span className="text-2xl">🌐</span>
+                Social Platforms
+              </h3>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {socialPlatforms.map((platform, index) => (
                   <motion.a
-                    key={social.label}
-                    href={social.href}
+                    key={platform.label}
+                    href={platform.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`p-4 rounded-full text-white transition-all duration-300 ${social.color}`}
-                    title={social.label}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    whileHover={{
+                      scale: 1.1,
+                      rotateY: 10,
+                      z: 30,
+                    }}
+                    className={`
+                      relative p-4 rounded-xl transition-all duration-300
+                      bg-gradient-to-br ${platform.color} opacity-90 hover:opacity-100
+                      group cursor-pointer
+                    `}
+                    style={{ transformStyle: "preserve-3d" }}
                   >
-                    <social.icon size={24} />
+                    <div className="flex items-center gap-3">
+                      <motion.div
+                        animate={{ rotateZ: [0, 360] }}
+                        transition={{
+                          duration: 8,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
+                        className="group-hover:animate-none"
+                      >
+                        <platform.icon className="text-2xl text-white" />
+                      </motion.div>
+                      <div>
+                        <h4 className="text-white font-semibold">
+                          {platform.label}
+                        </h4>
+                        <p className="text-white/70 text-sm">
+                          {platform.count}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Hover Glow Effect */}
+                    <motion.div
+                      className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-30 transition-opacity duration-300"
+                      style={{
+                        background:
+                          "radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%)",
+                      }}
+                    />
                   </motion.a>
                 ))}
               </div>
-            </motion.div>
+            </Gaming3DCard>
           </motion.div>
 
-          {/* Contact Form */}
+          {/* Enhanced Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-gray-50 p-8 rounded-lg shadow-lg"
           >
-            <h3 className="text-2xl font-bold text-gray-900 mb-8">
-              Send Me a Message
-            </h3>
-
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label
-                    htmlFor="firstName"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    name="firstName"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
-                    placeholder="Your first name"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="lastName"
-                    className="block text-sm font-medium text-gray-700 mb-2"
-                  >
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    name="lastName"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
-                    placeholder="Your last name"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="subject"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
-                  placeholder="What's this about?"
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={6}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-colors resize-none"
-                  placeholder="Tell me about your project or just say hello!"
-                ></textarea>
-              </div>
-
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full bg-primary hover:bg-secondary text-white py-3 px-6 rounded-lg font-semibold transition-colors duration-300"
-                onClick={(e) => {
-                  e.preventDefault();
-                  alert(
-                    "Contact form functionality will be implemented with backend integration!"
-                  );
-                }}
-              >
+            <Gaming3DCard glowColor="green" intensity={1.5}>
+              <h3 className="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                <FaPaperPlane className="text-green-400" />
                 Send Message
-              </motion.button>
-            </form>
+              </h3>
 
-            <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="text-sm text-blue-800">
-                <strong>Note:</strong> You can also reach me directly via email
-                or WhatsApp for faster communication!
-              </p>
-            </div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <motion.div whileFocus={{ scale: 1.02 }} className="relative">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      First Name
+                    </label>
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
+                      placeholder="Your first name"
+                      required
+                    />
+                  </motion.div>
+
+                  <motion.div whileFocus={{ scale: 1.02 }} className="relative">
+                    <label className="block text-sm font-medium text-gray-300 mb-2">
+                      Last Name
+                    </label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
+                      placeholder="Your last name"
+                      required
+                    />
+                  </motion.div>
+                </div>
+
+                <motion.div whileFocus={{ scale: 1.02 }} className="relative">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
+                    placeholder="your.email@example.com"
+                    required
+                  />
+                </motion.div>
+
+                <motion.div whileFocus={{ scale: 1.02 }} className="relative">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Phone Number (Optional)
+                  </label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
+                    placeholder="+880 1XXX XXXXXX"
+                  />
+                </motion.div>
+
+                <motion.div whileFocus={{ scale: 1.02 }} className="relative">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Preferred Contact Method
+                  </label>
+                  <select
+                    name="contactMethod"
+                    value={formData.contactMethod}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
+                  >
+                    <option value="email" className="bg-gray-800">
+                      Email
+                    </option>
+                    <option value="phone" className="bg-gray-800">
+                      Phone Call
+                    </option>
+                    <option value="whatsapp" className="bg-gray-800">
+                      WhatsApp
+                    </option>
+                    <option value="telegram" className="bg-gray-800">
+                      Telegram
+                    </option>
+                  </select>
+                </motion.div>
+
+                <motion.div whileFocus={{ scale: 1.02 }} className="relative">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Subject
+                  </label>
+                  <input
+                    type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300"
+                    placeholder="What's this about?"
+                    required
+                  />
+                </motion.div>
+
+                <motion.div whileFocus={{ scale: 1.02 }} className="relative">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Message
+                  </label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    rows={5}
+                    className="w-full px-4 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-300 resize-none"
+                    placeholder="Tell me about your project or just say hello!"
+                    required
+                  ></textarea>
+                </motion.div>
+
+                <GamingButton
+                  variant="success"
+                  size="lg"
+                  icon={<FaPaperPlane />}
+                  glitch={true}
+                  className="w-full"
+                  onClick={() => handleSubmit(new Event("submit") as any)}
+                >
+                  Launch Message 🚀
+                </GamingButton>
+              </form>
+
+              {/* Quick Contact Options */}
+              <div className="mt-6 p-4 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
+                <p className="text-sm text-gray-300 mb-3 text-center">
+                  <strong>Need faster response?</strong> Try these instant
+                  options:
+                </p>
+                <div className="flex gap-3 justify-center">
+                  <GamingButton
+                    href="mailto:mdjfardous@gmail.com"
+                    variant="primary"
+                    size="sm"
+                    icon={<FaEnvelope />}
+                  >
+                    Email
+                  </GamingButton>
+                  <GamingButton
+                    href="https://wa.me/8801688645882"
+                    variant="success"
+                    size="sm"
+                    icon={<FaWhatsapp />}
+                  >
+                    WhatsApp
+                  </GamingButton>
+                  <GamingButton
+                    href="tel:+8801688645882"
+                    variant="secondary"
+                    size="sm"
+                    icon={<FaPhone />}
+                  >
+                    Call
+                  </GamingButton>
+                </div>
+              </div>
+            </Gaming3DCard>
           </motion.div>
         </div>
 
@@ -296,31 +548,42 @@ const Contact = () => {
           viewport={{ once: true }}
           className="text-center mt-16"
         >
-          <div className="bg-gradient-to-r from-primary to-secondary p-8 rounded-lg text-white">
-            <h3 className="text-2xl font-bold mb-4">
-              Ready to Start Your Project?
+          <Gaming3DCard glowColor="pink" intensity={1.8} className="p-8">
+            <motion.div
+              animate={{ rotate: [0, 10, -10, 0] }}
+              transition={{ duration: 4, repeat: Infinity }}
+              className="text-6xl mb-4"
+            >
+              🤝
+            </motion.div>
+            <h3 className="text-3xl font-bold text-white mb-4 neon-text">
+              Ready to Build Something Amazing?
             </h3>
-            <p className="text-lg mb-6 opacity-90">
-              Let's discuss your ideas and turn them into reality with modern
-              web technologies.
+            <p className="text-lg text-gray-300 mb-6 opacity-90 max-w-2xl mx-auto">
+              Whether it's a simple website or a complex web application, I'm
+              here to help bring your vision to life with cutting-edge
+              technology and creative solutions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
+              <GamingButton
                 href="mailto:mdjfardous@gmail.com"
-                className="bg-white text-primary hover:bg-gray-100 py-3 px-6 rounded-lg font-semibold transition-colors"
+                variant="primary"
+                size="lg"
+                icon={<FaEnvelope />}
+                glitch={true}
               >
-                Email Me Now
-              </a>
-              <a
+                Start a Project
+              </GamingButton>
+              <GamingButton
                 href="https://wa.me/8801688645882"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-lg font-semibold transition-colors"
+                variant="success"
+                size="lg"
+                icon={<FaWhatsapp />}
               >
-                WhatsApp Me
-              </a>
+                Quick Chat
+              </GamingButton>
             </div>
-          </div>
+          </Gaming3DCard>
         </motion.div>
       </div>
     </section>

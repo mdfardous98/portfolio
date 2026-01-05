@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { FaDownload, FaGithub, FaLinkedin, FaFacebook } from "react-icons/fa";
 import Image from "next/image";
+import CurrentDateTime from "./CurrentDateTime";
 
 const Hero = () => {
   const handleResumeDownload = () => {
@@ -75,7 +76,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.8 }}
-              className="flex space-x-4"
+              className="flex space-x-4 mb-8"
             >
               <a
                 href="https://github.com/mdfardous98"
@@ -102,6 +103,9 @@ const Hero = () => {
                 <FaFacebook size={24} />
               </a>
             </motion.div>
+
+            {/* Current Date & Time */}
+            <CurrentDateTime />
           </motion.div>
 
           {/* Right Content - Profile Image */}

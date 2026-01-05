@@ -15,6 +15,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useTheme } from "@/contexts/ThemeContext";
+import PlaceholderImage from "./PlaceholderImage";
 
 const AdvancedProjects = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -30,8 +31,9 @@ const AdvancedProjects = () => {
       id: 1,
       name: "PawMart",
       subtitle: "Pet Adoption Platform",
-      image:
-        "https://via.placeholder.com/600x400/3B82F6/FFFFFF?text=PawMart+Pet+Adoption",
+      image: null,
+      placeholderText: "PawMart Pet Adoption",
+      placeholderColor: "#3B82F6",
       shortDescription:
         "A comprehensive pet adoption platform with multi-role authentication, admin dashboard, and seamless user experience.",
       technologies: [
@@ -52,8 +54,9 @@ const AdvancedProjects = () => {
       id: 2,
       name: "Digital Life Lessons",
       subtitle: "Modern Blog Platform",
-      image:
-        "https://via.placeholder.com/600x400/10B981/FFFFFF?text=Digital+Life+Lessons",
+      image: null,
+      placeholderText: "Digital Life Lessons",
+      placeholderColor: "#10B981",
       shortDescription:
         "A feature-rich blog platform with user authentication, CRUD operations, and interactive commenting system.",
       technologies: [
@@ -72,8 +75,9 @@ const AdvancedProjects = () => {
       id: 3,
       name: "Care XYZ",
       subtitle: "Healthcare Platform",
-      image:
-        "https://via.placeholder.com/600x400/8B5CF6/FFFFFF?text=Care+XYZ+Healthcare",
+      image: null,
+      placeholderText: "Care XYZ Healthcare",
+      placeholderColor: "#8B5CF6",
       shortDescription:
         "A specialized healthcare platform focusing on winter pet care with appointment booking system.",
       technologies: ["React", "Firebase", "Tailwind CSS", "JavaScript ES6+"],
@@ -87,8 +91,9 @@ const AdvancedProjects = () => {
       id: 4,
       name: "EcoShop",
       subtitle: "E-commerce Platform",
-      image:
-        "https://via.placeholder.com/600x400/F59E0B/FFFFFF?text=EcoShop+E-commerce",
+      image: null,
+      placeholderText: "EcoShop E-commerce",
+      placeholderColor: "#F59E0B",
       shortDescription:
         "A modern e-commerce platform with shopping cart, payment integration, and inventory management.",
       technologies: ["Next.js", "Stripe", "PostgreSQL", "Prisma", "TypeScript"],
@@ -102,8 +107,9 @@ const AdvancedProjects = () => {
       id: 5,
       name: "TaskFlow",
       subtitle: "Project Management Tool",
-      image:
-        "https://via.placeholder.com/600x400/EF4444/FFFFFF?text=TaskFlow+Management",
+      image: null,
+      placeholderText: "TaskFlow Management",
+      placeholderColor: "#EF4444",
       shortDescription:
         "A collaborative project management tool with real-time updates, team collaboration, and task tracking.",
       technologies: ["React", "Socket.io", "Node.js", "MongoDB", "Redux"],
@@ -117,8 +123,9 @@ const AdvancedProjects = () => {
       id: 6,
       name: "WeatherWise",
       subtitle: "Weather Forecast App",
-      image:
-        "https://via.placeholder.com/600x400/06B6D4/FFFFFF?text=WeatherWise+App",
+      image: null,
+      placeholderText: "WeatherWise App",
+      placeholderColor: "#06B6D4",
       shortDescription:
         "A beautiful weather application with location-based forecasts, interactive maps, and weather alerts.",
       technologies: ["React Native", "OpenWeather API", "Expo", "AsyncStorage"],
@@ -266,13 +273,23 @@ const AdvancedProjects = () => {
                 }}
               >
                 <div className="relative overflow-hidden rounded-3xl shadow-2xl group card-hover">
-                  <Image
-                    src={project.image}
-                    alt={project.name}
-                    width={600}
-                    height={400}
-                    className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
+                  {project.image ? (
+                    <Image
+                      src={project.image}
+                      alt={project.name}
+                      width={600}
+                      height={400}
+                      className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  ) : (
+                    <PlaceholderImage
+                      width={600}
+                      height={320}
+                      text={project.placeholderText}
+                      bgColor={project.placeholderColor}
+                      className="w-full h-80 transition-transform duration-500 group-hover:scale-110"
+                    />
+                  )}
 
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />

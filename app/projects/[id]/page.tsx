@@ -1,4 +1,4 @@
-("use client");
+"use client";
 
 export const dynamicParams = true;
 import { motion } from "framer-motion";
@@ -6,13 +6,12 @@ import {
   FaArrowLeft,
   FaExternalLinkAlt,
   FaGithub,
-  FaCalendarAlt,
-  FaUsers,
   FaCog,
 } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import PlaceholderImage from "../../../components/PlaceholderImage";
 
 const ProjectDetail = () => {
   const params = useParams();
@@ -21,8 +20,9 @@ const ProjectDetail = () => {
   const projectsData = {
     "1": {
       name: "PawMart - Pet Adoption Platform",
-      image:
-        "https://via.placeholder.com/800x400/3B82F6/FFFFFF?text=PawMart+Pet+Adoption",
+      image: null,
+      placeholderText: "PawMart Pet Adoption",
+      placeholderColor: "#3B82F6",
       mainTech: [
         "React.js",
         "Node.js",
@@ -67,8 +67,9 @@ const ProjectDetail = () => {
 
     "2": {
       name: "Digital Life Lessons - Blog Platform",
-      image:
-        "https://via.placeholder.com/800x400/10B981/FFFFFF?text=Digital+Life+Lessons+Blog",
+      image: null,
+      placeholderText: "Digital Life Lessons Blog",
+      placeholderColor: "#10B981",
       mainTech: [
         "MERN Stack",
         "React.js",
@@ -113,8 +114,9 @@ const ProjectDetail = () => {
 
     "3": {
       name: "Care XYZ - Healthcare Platform",
-      image:
-        "https://via.placeholder.com/800x400/8B5CF6/FFFFFF?text=Care+XYZ+Healthcare",
+      image: null,
+      placeholderText: "Care XYZ Healthcare",
+      placeholderColor: "#8B5CF6",
       mainTech: [
         "React.js",
         "Firebase",
@@ -231,12 +233,22 @@ const ProjectDetail = () => {
           className="mb-12"
         >
           <div className="relative h-96 rounded-lg overflow-hidden shadow-xl">
-            <Image
-              src={project.image}
-              alt={project.name}
-              fill
-              className="object-cover"
-            />
+            {project.image ? (
+              <Image
+                src={project.image}
+                alt={project.name}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <PlaceholderImage
+                width={800}
+                height={384}
+                text={project.placeholderText}
+                bgColor={project.placeholderColor}
+                className="w-full h-full"
+              />
+            )}
           </div>
         </motion.div>
 
